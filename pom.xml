@@ -44,6 +44,15 @@
 			<version>${spring.version}</version>
 			<scope>test</scope>
 		</dependency>
+
+		<!-- Dependency for javax.inject which used in demo of @Named javax annotation 
+			for declaring spring component -->
+		<dependency>
+			<groupId>javax.inject</groupId>
+			<artifactId>javax.inject</artifactId>
+			<version>1</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>

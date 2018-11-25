@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
  */
 
 // Default bean name/is is : unqualified class name with first character in small case.
-@Component("customNameForThisBean") // Used so that spring discovers this class as spring bean/component.
+@Component // Used so that spring discovers this class as spring bean/component.
 public class SgtPeppers implements CompactDisk, BeanNameAware {
 
 	private String myName;

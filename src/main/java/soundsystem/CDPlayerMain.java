@@ -9,7 +9,7 @@ public class CDPlayerMain {
 		AnnotationConfigApplicationContext annotationConfigApplicationContext = new AnnotationConfigApplicationContext(
 				CDPlayerConfiguration.class);
 		
-		CompactDisk compactDisk = (CompactDisk) annotationConfigApplicationContext.getBean("customNameForThisBean");
+		CompactDisk compactDisk = annotationConfigApplicationContext.getBean(CompactDisk.class);
 		compactDisk.play();
 		annotationConfigApplicationContext.close();
 	}
