@@ -16,6 +16,10 @@ public class Car implements Vehical {
 	private Driver driver;
 	private Fuel fuel;
 	private EngineOil engineOil;
+
+	// We can use @Autowired annotation at field level also to inject dependency.
+	@Autowired
+	private Battery battery;
 	
 	// Constructor based injection
 	@Autowired
@@ -38,7 +42,7 @@ public class Car implements Vehical {
 
 	@Override
 	public void drive() {
-		if (driver != null && fuel != null && engineOil != null) {
+		if (driver != null && fuel != null && engineOil != null && battery != null) {
 			System.out.println("All needs satisfied, car is ready to move");
 		} else {
 			System.out.println("Somethig missing ...");
