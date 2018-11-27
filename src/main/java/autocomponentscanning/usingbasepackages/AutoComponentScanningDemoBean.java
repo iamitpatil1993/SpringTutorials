@@ -1,4 +1,4 @@
-package autocomponentscanning;
+package autocomponentscanning.usingbasepackages;
 
 import org.springframework.stereotype.Component;
 

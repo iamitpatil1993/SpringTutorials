@@ -1,4 +1,4 @@
-package autocomponentscanning;
+package autocomponentscanning.usingbasepackageclasses;
 
 import static org.junit.Assert.*;
 
@@ -9,19 +9,19 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
 
-import autocomponentscanning.usingbasepackages.AutoComponentScanningDemoBean;
-import soundsystem.CDPlayerConfiguration;
+import javaconfig.ProjectConfiguration;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = {CDPlayerConfiguration.class}, loader = AnnotationConfigContextLoader.class)
-public class AutoComponentScanningDemoBeanTest {
+@ContextConfiguration(classes = {ProjectConfiguration.class}, loader = AnnotationConfigContextLoader.class)
+public class AutoScanningComponentDemoBean1Test {
 
 	@Autowired
-	private AutoComponentScanningDemoBean bean;
+	private AutoScanningComponentDemoBean1 bean;
 	
 	@Test
 	public void testGreet() {
 		assertNotNull(bean);
 		bean.greet();
 	}
+
 }
