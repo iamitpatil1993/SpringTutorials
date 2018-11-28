@@ -21,4 +21,11 @@ public class JavaConfiguration {
 		// We can do anything to  instantiate, configure, in any way as possiblei in java.
 		return new SimpleJavaConfigDemoBean();
 	}
+	
+	@Bean
+	public InjectionJavaConfigDemoBean injectionJavaConfigDemoBean() {
+		// This is not simple method call to simpleJavaConfigDemoBean(), spring intercept every method call to method 
+		// annoted with @Bean. If bean is already created it returns existing bean from bean Factory (Since default scope is singleton) 
+		return new InjectionJavaConfigDemoBean(simpleJavaConfigDemoBean());
+	}
 }
