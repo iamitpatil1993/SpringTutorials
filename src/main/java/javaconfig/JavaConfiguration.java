@@ -3,6 +3,8 @@ package javaconfig;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import autowiring.Car;
+
 /**
  * 
  * @author amit
@@ -27,5 +29,13 @@ public class JavaConfiguration {
 		// This is not simple method call to simpleJavaConfigDemoBean(), spring intercept every method call to method 
 		// annoted with @Bean. If bean is already created it returns existing bean from bean Factory (Since default scope is singleton) 
 		return new InjectionJavaConfigDemoBean(simpleJavaConfigDemoBean());
+	}
+	
+	// Two argument to these method will be resolved by spring container. It looks at all areas for bean javaconfig, xml and annotations
+	@Bean
+	public InjectionJavaConfigDemo2 injectionJavaConfigDemo2(SimpleJavaConfigDemoBean simpleJavaConfigDemoBean, Car car) {
+		InjectionJavaConfigDemo2 injectionJavaConfigDemo2 = new InjectionJavaConfigDemo2(simpleJavaConfigDemoBean); // Constructo based injection
+		injectionJavaConfigDemo2.setCar(car); // We can use setter based injection
+		return injectionJavaConfigDemo2;
 	}
 }
