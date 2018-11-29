@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:c="http://www.springframework.org/schema/c"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
@@ -10,4 +11,10 @@
 	<bean id = "xmlCDPlayerImpl" class="xmlconfig.XmlCDPlayerImpl">
 		<constructor-arg ref="xmlconfig.XmlConfigSgtPeppers#0"/>
 	</bean>
+	
+	<bean id = "simcard" class = "xmlconfig.cnamespace.SimCard" c:_="Airtel"/>
+	
+	<bean id = "battery" class = "xmlconfig.cnamespace.Battery" />
+	
+	<bean id = "phone" class = "xmlconfig.cnamespace.Phone" c:_0-ref="simcard" c:_1-ref="battery" c:_2="3123123" />
 </beans>
