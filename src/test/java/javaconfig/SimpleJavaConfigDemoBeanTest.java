@@ -10,8 +10,10 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
 
+import config.ProjectConfiguration;
+
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = { JavaConfiguration.class }, loader = AnnotationConfigContextLoader.class)
+@ContextConfiguration(classes = { JavaConfiguration.class, ProjectConfiguration.class }, loader = AnnotationConfigContextLoader.class)
 public class SimpleJavaConfigDemoBeanTest {
 
 	@Autowired
@@ -34,7 +36,7 @@ public class SimpleJavaConfigDemoBeanTest {
 	@Test
 	public void beanIdNameTest() {
 		AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext(
-				JavaConfiguration.class);
+				JavaConfiguration.class, ProjectConfiguration.class);
 		assertNotNull(applicationContext.getBean("javaConfigDemoBean"));
 		assertNotNull(applicationContext.getBean("javaConfigDemoBean2"));
 		applicationContext.close();
