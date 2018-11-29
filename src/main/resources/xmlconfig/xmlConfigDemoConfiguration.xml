@@ -4,8 +4,10 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
 	<!-- Default ID will get assigned, which is xmlconfig.XmlConfigSgtPeppers#0 -->
-	<bean class="xmlconfig.XmlConfigSgtPeppers" />
+	<bean class="xmlconfig.XmlConfigSgtPeppers"/>
 	
 	<!-- we are providing custom bean id -->
-	<bean id = "xmlCDPlayerImpl" class="xmlconfig.XmlCDPlayerImpl"/>
+	<bean id = "xmlCDPlayerImpl" class="xmlconfig.XmlCDPlayerImpl">
+		<constructor-arg ref="xmlconfig.XmlConfigSgtPeppers#0"/>
+	</bean>
 </beans>
