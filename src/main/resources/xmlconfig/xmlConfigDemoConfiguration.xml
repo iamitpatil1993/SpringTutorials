@@ -5,4 +5,7 @@
 
 	<!-- Default ID will get assigned, which is xmlconfig.XmlConfigSgtPeppers#0 -->
 	<bean class="xmlconfig.XmlConfigSgtPeppers" />
+	
+	<!-- we are providing custom bean id -->
+	<bean id = "xmlCDPlayerImpl" class="xmlconfig.XmlCDPlayerImpl"/>
 </beans>
