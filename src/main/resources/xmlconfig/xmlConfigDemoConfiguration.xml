@@ -17,4 +17,18 @@
 	<bean id = "battery" class = "xmlconfig.cnamespace.Battery" />
 	
 	<bean id = "phone" class = "xmlconfig.cnamespace.Phone" c:_0-ref="simcard" c:_1-ref="battery" c:_2="3123123" />
+	
+	<bean id = "blankDisk" class = "xmlconfig.collectioninjection.BlankDisk">
+		<constructor-arg value="Top 50 Ganna International"/>
+		<constructor-arg value="Ganna Music"/>
+		<constructor-arg>
+			<list>
+				<value>Girls like you</value>
+				<value>Taki taki</value>
+				<value>Paris</value>
+				<value>Urvashi</value>
+				<value>Jonas Blue, Rise</value>
+			</list>
+		</constructor-arg>
+	</bean>
 </beans>
