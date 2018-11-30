@@ -31,4 +31,14 @@
 			</list>
 		</constructor-arg>
 	</bean>
+	
+	<bean id = "discoGraphy" class="xmlconfig.collectioninjection.Discography">
+		<constructor-arg value="Imagin Dragons"/>
+		<constructor-arg>
+			<set>
+				<ref bean="blankDisk"/>
+				<ref bean="blankDisk"/> <!-- Intentionally adding same bean two times since it a set spring will ensure uniquenesss -->
+			</set>
+		</constructor-arg>
+	</bean>
 </beans>
