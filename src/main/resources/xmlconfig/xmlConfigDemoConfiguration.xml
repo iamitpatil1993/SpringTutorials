@@ -41,4 +41,9 @@
 			</set>
 		</constructor-arg>
 	</bean>
+	
+	<bean id = "dvdPlayer" class="xmlconfig.properyinjection.DVDPlayer">
+		<property name="compactDisc" ref="blankDisk"></property>
+	</bean>
+	
 </beans>
