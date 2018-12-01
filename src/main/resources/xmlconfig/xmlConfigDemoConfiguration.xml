@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:c="http://www.springframework.org/schema/c"
+	xmlns:p="http://www.springframework.org/schema/p"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
@@ -48,4 +49,15 @@
 		<property name="compactDisc" ref="blankDisk"></property>
 	</bean>
 	
+	<!-- Mixed p:namespace with <proeprty> since collections can not be injected using p:namespace -->
+	<!-- Watch we have used init-method to validate bean validation along with InitializingBean. InitializingBean get invoked first in bean life-cycle, before custom-init method -->
+	<bean init-method="validateBean" id = "pnamespaceDemoBean" class="xmlconfig.properyinjection.pnamespace.PnamespaceDemoBean" p:compactDisk-ref="blankDisk" p:sampleString="Sample Value" >
+		<property name="sampleList">
+			<list>
+				<value>Amit</value>
+				<value>learing</value>
+				<value>spring</value>
+			</list>
+		</property>
+	</bean>
 </beans>
