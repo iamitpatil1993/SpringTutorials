@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- this is parent xml config file which will be used as input to container 
+		creation -->
+		<!-- since, this is parent config file, it should be used to enable component scanning if required using <context:component-scan> element -->
+	<import resource="addressConfig.xml" />
+	<import resource="employeeConfig.xml" />
+	<import resource="managerConfig.xml" />
+	<import resource="qualificationConfig.xml" />
+	<bean class="mixconfig.DesignationConfig" /> <!-- This is how to refer java config from xml -->
+</beans>

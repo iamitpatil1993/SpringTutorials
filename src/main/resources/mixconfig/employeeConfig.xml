@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:c="http://www.springframework.org/schema/c"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- Employee has dpendnecy on four beans, which will be automatically available 
+		to this bean because, all four beans are declared in parenet xml config file -->
+	<bean id="employee" class="mixconfig.Employee"
+		c:qualification-ref="qualification" c:address-ref="address"
+		c:manager-ref="manager" c:designation-ref="designation" />
+
+</beans>
