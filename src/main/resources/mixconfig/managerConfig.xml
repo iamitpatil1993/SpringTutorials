@@ -6,5 +6,6 @@
 	<bean id="manager" class="mixconfig.Manager">
 		<constructor-arg ref="designation" />
 	</bean>
+	
 
 </beans>
