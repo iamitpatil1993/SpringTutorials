@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- Watch, we are using nested <beans> element, using which we can group 
+		beans belonging to same profile in single tag and all beans into single config 
+		file. No need to create profile specific xml config files -->
+	<beans profile="dev">
+		<bean id="inMemoryDataSource"
+			class="profiles.javaconfigbased.InMemoryDataSource" />
+	</beans>
+
+</beans>

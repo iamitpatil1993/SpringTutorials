@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans profile="qa,prod"
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- Watch, even though we import below file (which defines beans with dev 
+		profile) it will be ingored by spring container, because current profile 
+		active is qa/prod but file we are importing has benas with dev profiles, 
+		so spring container is smart enough to catch this wrong import as well. Wrong 
+		in the sense, we have imported xml file which defines beans of different 
+		profile into this file which defines benas of different scopes -->
+	<import resource="profileDemoXmlConfig2.xml" />
+	
+	<bean id="realDataSource"
+		class="profiles.javaconfigbased.RealDataSource" />
+</beans>
