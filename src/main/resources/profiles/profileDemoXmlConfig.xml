@@ -13,5 +13,5 @@
 	<import resource="profileDemoXmlConfig2.xml" />
 	
 	<bean id="realDataSource"
-		class="profiles.javaconfigbased.RealDataSource" />
+		class="profiles.javaconfig.RealDataSource" />
 </beans>

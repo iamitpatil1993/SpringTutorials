@@ -8,7 +8,7 @@
 		file. No need to create profile specific xml config files -->
 	<beans profile="dev">
 		<bean id="inMemoryDataSource"
-			class="profiles.javaconfigbased.InMemoryDataSource" />
+			class="profiles.javaconfig.InMemoryDataSource" />
 	</beans>
 
 </beans>
