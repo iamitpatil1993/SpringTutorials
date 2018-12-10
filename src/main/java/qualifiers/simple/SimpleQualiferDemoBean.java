@@ -18,9 +18,8 @@ import org.springframework.stereotype.Component;
 public class SimpleQualiferDemoBean {
 
 	@Autowired
-	@Qualifier("iceCream") // default qualifier for any bean is it's id. So IceCream beans has defaut id
-							// 'iceCream' and hence it's qualifier is 'iceCream'. If we remove this line
-							// SimpleQualiferDemoBeanTest will break
+	@Qualifier("cold") // IceCream bean's qualifier is 'cold'. If we remove this line
+					   // SimpleQualiferDemoBeanTest will break
 	private Dessert dessert;
 
 	public Dessert getDessert() {
