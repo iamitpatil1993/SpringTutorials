@@ -1,7 +1,6 @@
 package qualifiers.simple;
 
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -20,8 +19,9 @@ public class SimpleQualiferDemoBeanTest {
 	@Test
 	public void test() {
 		assertNotNull(bean);
-		assertNotNull(bean.getDessert());
-		assertTrue(bean.getDessert() instanceof IceCream);
+		assertNotNull(bean.getIcecreamCake());
+		assertNotNull(bean.getCake());
+		assertNotNull(bean.getIceCream());
 	}
 
 }

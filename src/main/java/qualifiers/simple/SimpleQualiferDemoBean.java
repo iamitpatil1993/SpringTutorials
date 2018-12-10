@@ -4,8 +4,12 @@
 package qualifiers.simple;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
+
+import qualifiers.simple.customqualifiers.Baked;
+import qualifiers.simple.customqualifiers.Cold;
+import qualifiers.simple.customqualifiers.Creamy;
+import qualifiers.simple.customqualifiers.Soft;
 
 /**
  * @author amit 
@@ -17,16 +21,47 @@ import org.springframework.stereotype.Component;
 @Component
 public class SimpleQualiferDemoBean {
 
+	/**
+	 * Multiple qualifiers to narrow down the choice, instead of using direct implementation specific qualifier.
+	 */
 	@Autowired
-	@Qualifier("cold") // IceCream bean's qualifier is 'cold'. If we remove this line
-					   // SimpleQualiferDemoBeanTest will break
-	private Dessert dessert;
+	@Cold
+	@Soft
+	@Baked
+	private Dessert icecreamCake;
 
-	public Dessert getDessert() {
-		return dessert;
+	@Autowired
+	@Soft
+	@Baked
+	private Dessert cake;
+	
+	@Autowired
+	@Cold
+	@Creamy
+	private Dessert iceCream;
+
+	public Dessert getIcecreamCake() {
+		return icecreamCake;
 	}
 
-	public void setDessert(Dessert dessert) {
+	public void setIcecreamCake(Dessert icecreamCake) {
+		this.icecreamCake = icecreamCake;
+	}
+
+	public Dessert getCake() {
+		return cake;
+	}
+
+	public void setCake(Dessert cake) {
+		this.cake = cake;
+	}
+
+	public Dessert getIceCream() {
+		return iceCream;
+	}
+
+	public void setIceCream(Dessert iceCream) {
+		this.iceCream = iceCream;
 	}
 
 }

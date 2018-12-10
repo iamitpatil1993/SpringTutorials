@@ -3,8 +3,10 @@
  */
 package qualifiers.simple;
 
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
+
+import qualifiers.simple.customqualifiers.Cold;
+import qualifiers.simple.customqualifiers.Creamy;
 
 /**
  * @author amit
@@ -13,7 +15,8 @@ import org.springframework.stereotype.Component;
  */
 
 @Component
-@Qualifier("cold")
+@Cold
+@Creamy
 public class IceCream implements Dessert {
 
 	// Nothing to do here
