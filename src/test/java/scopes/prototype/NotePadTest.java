@@ -37,7 +37,6 @@ public class NotePadTest {
 		
 		assertNotEquals(notePad.getCreatedDate(), notePad1.getCreatedDate());
 		assertNotEquals(notePad.getCreatedDate(), notePad2.getCreatedDate());
-		assertNotEquals(notePad1.getCreatedDate(), notePad2.getCreatedDate());
 		
 		applicationContext.close();
 		
