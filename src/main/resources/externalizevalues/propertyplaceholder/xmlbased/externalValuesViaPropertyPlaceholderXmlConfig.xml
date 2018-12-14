@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:c="http://www.springframework.org/schema/c"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd http://www.springframework.org/schema/context
+http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<!-- We need to use this annotation to declare PropertySourcePlacegolderConfigurer 
+		bean in xml. We do no need to explicitly delclare this bean as we need to 
+		do in javaCOnfig. Also, there is no separate way to declare PropertySources 
+		as we do in javaConfig using @propertySource annotation. We need to use location 
+		element of property-placeholder -->
+	<context:property-placeholder
+		location="classpath:app.properties,dataSource.properties" />
+
+	<bean id="externalValueViaPropertyPlaceholderDemoBean"
+		class="externalizevalues.propertyplaceholder.xmlbased.ExternalValueViaPropertyPlaceholderDemoBean"
+		c:_0="${app.name}" c:_1="${datasource.poolSize}" c:_2="${username}"
+		c:_3="${foo}" />
+
+</beans>
