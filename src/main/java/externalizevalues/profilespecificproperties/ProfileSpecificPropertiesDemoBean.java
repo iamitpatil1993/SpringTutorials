@@ -27,6 +27,9 @@ public class ProfileSpecificPropertiesDemoBean implements InitializingBean {
 	
 	@Value("${db.host}")
 	private String dbHost;
+	
+	@Value("${db.port:5432}") // this is how we can give default value as well of value is not available.
+	private int port;
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
@@ -36,6 +39,6 @@ public class ProfileSpecificPropertiesDemoBean implements InitializingBean {
 	@Override
 	public String toString() {
 		return "ProfileSpecificPropertiesDemoBean [dbUserName=" + dbUserName + ", dbPassword=" + dbPassword
-				+ ", dbHost=" + dbHost + "]";
+				+ ", dbHost=" + dbHost + ", port=" + port + "]";
 	}
 }
