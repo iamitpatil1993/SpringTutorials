@@ -9,8 +9,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 /**
- * @author amit 
- * This class/bean demonstrate use of SpEL for auto-wiring in auto
+ * @author amit This class/bean demonstrate use of SpEL for auto-wiring in auto
  *         discovered components in spring.
  *
  */
@@ -24,7 +23,8 @@ public class SpringExpressionLanguageDemoBean {
 	@Value("#{'amipatil'}")
 	private String staticStringValue;
 
-	@Value("#{T(System).currentTimeMillis()}") // in case of classes from java.lang, we do not need to specify fully qualified class names
+	@Value("#{T(System).currentTimeMillis()}") // in case of classes from java.lang, we do not need to specify fully
+												// qualified class names
 	private Long staticFunctionCallValue;
 
 	@Value("#{user.name}")
@@ -43,60 +43,84 @@ public class SpringExpressionLanguageDemoBean {
 						// this, which adds tight coupling between beans and using interface becomes
 						// pointless
 	private User user;
-	
-	@Value("#{T(spel.annotationbased.User).staticProperty}") // all classes other than java.lang needs to be specific fully-qualified.
+
+	@Value("#{T(spel.annotationbased.User).staticProperty}") // all classes other than java.lang needs to be specific
+																// fully-qualified.
 	private String staticPropertyClass;
-	
+
 	@Value("#{user.getName()}")
 	private String instanceFunctionCallValue;
-	
+
 	@Value("#{user.getName().toUpperCase()}")
 	private String nestedInstanceFunctionCallValue;
-	
-	@Value("#{user.getNickName()?.toUpperCase()}") // ?. check if left side is null or not, if it is not null only then it calls right hand side otherwise returns null.
+
+	@Value("#{user.getNickName()?.toUpperCase()}") // ?. check if left side is null or not, if it is not null only then
+													// it calls right hand side otherwise returns null.
 	private String nullCheckBeforeNestedValueAccess;
-	
+
 	@Value("#{2 * T(Math).PI * 3}") // This expression evaluates circumference of circle with radious 3. 2PIr
 	private Double arithmaticoperationValue;
-	
+
 	@Value("#{T(Math).PI * 3 ^ 2}") // This expression evaluates area of circle with radious 3. PIR^2
 	private Double arithmaticoperationValue2;
-	
+
 	@Value("#{'Mr ' + user.name}") // when + operator used on string, it concatenates them
 	private String stringConcatenation;
-	
-	@Value("#{'Amit Patil' eq user.name}") // comparison operatos always results into boolean result, so target type must be of type boolean
+
+	@Value("#{'Amit Patil' eq user.name}") // comparison operatos always results into boolean result, so target type
+											// must be of type boolean
 	private boolean comparisonResultValue;
-	
-	@Value("#{user.nickName eq null ? 'amty' : user.nickName}") // syntax of ternary operator is exactly similar to java syntax
+
+	@Value("#{user.nickName eq null ? 'amty' : user.nickName}") // syntax of ternary operator is exactly similar to java
+																// syntax
 	private String ternaryOperatorResultValue;
-	
-	@Value("#{user.nickName ?: 'amty'}") // elvis operator is short cut for ternary operator where we primary use for null check and default value assign if null.
+
+	@Value("#{user.nickName ?: 'amty'}") // elvis operator is short cut for ternary operator where we primary use for
+											// null check and default value assign if null.
 	private String elvisOperatorResultValue;
-	
+
 	@Value("#{user.email matches '[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.com'}")
 	private String regExMacherResultValue;
-	
+
 	@Value("#{user.placesLivedIn[1]}")
 	private Address collectionElementValue;
-	
+
 	@Value("#{user.placesLivedIn[1].city}")
 	private String collectionElementPropertyValue;
-	
+
 	@Value("#{user.placesLivedIn[1].city.toUpperCase()}")
 	private String collectionElementPropertyFunctionValue;
-	
+
 	@Value("#{user.placesLivedIn.?[city eq 'Pune']}")
 	private List<Address> filteredCollectionValue;
-	
-	@Value("#{user.placesLivedIn.?[city eq 'Pune'].![area]}") // This is projection, i.e fetching property from object of collection
+
+	@Value("#{user.placesLivedIn.?[city eq 'Pune'].![area]}") // This is projection, i.e fetching property from object
+																// of collection
 	private List<String> filteredCollectionFunctionCallValue;
-	
-	@Value("#{user.placesLivedIn.^[city eq 'Pune']}") // this filters the collection and finds first element in collection which matches expression
+
+	@Value("#{user.placesLivedIn.^[city eq 'Pune']}") // this filters the collection and finds first element in
+														// collection which matches expression
 	private Address firstMatchingElementInCollectionValue;
-	
-	@Value("#{user.placesLivedIn.$[city eq 'Pune']}") // this filters the collection and finds last element in collection which matches expression
+
+	@Value("#{user.placesLivedIn.$[city eq 'Pune']}") // this filters the collection and finds last element in
+														// collection which matches expression
 	private Address lastMatchingElementInCollectionValue;
+
+	@Value("#{environment.getProperty('app.name')}") // this is how we can read properties from properties file using
+														// SpEL, if we do not want to use property placeholder and
+														// delcare PropertySourcePlaceholderConfigurer. In this way u
+														// can access any property as it is simple method call on
+														// environment implicit spring object.
+	private String propertiesFromPropertiesFile;
+
+	@Value("#{environment.getProperty('username')}") // we can use environment object to inject anything as we do in
+														// pure java code, we don't need to use SpEL implicit objects
+														// 'systemProperties' and 'systemEnvironment'. 
+														// BUT, accessing
+														// system and environment properties via implicit objects and
+														// properties from external property file via property place
+														// holder seems more correct way to me.
+	private String environmentPropertyUsingEnvironmentObject;
 
 	@Override
 	public String toString() {
@@ -117,13 +141,9 @@ public class SpringExpressionLanguageDemoBean {
 				+ ", filteredCollectionValue=" + filteredCollectionValue + ", filteredCollectionFunctionCallValue="
 				+ filteredCollectionFunctionCallValue + ", firstMatchingElementInCollectionValue="
 				+ firstMatchingElementInCollectionValue + ", lastMatchingElementInCollectionValue="
-				+ lastMatchingElementInCollectionValue + "]";
+				+ lastMatchingElementInCollectionValue + ", propertiesFromPropertiesFile="
+				+ propertiesFromPropertiesFile + ", environmentPropertyUsingEnvironmentObject="
+				+ environmentPropertyUsingEnvironmentObject + "]";
 	}
-	
-	
-	
-	
-	
-	
 
 }
