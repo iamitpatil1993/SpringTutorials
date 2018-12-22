@@ -14,14 +14,16 @@
 	<!-- Declare beans -->
 	<bean id="xmlBasedRockBand" class="aop.xmlbased.XmlBasedRockBand" />
 
-	<bean id="xmlBasedElectronicDigitalMusicPerformance"
-		class="aop.xmlbased.XmlBasedElectronicDigitalMusicPerformance" />
+	<bean id="xmlBasedElectronicDigitalMusicPerformance" class="aop.xmlbased.XmlBasedElectronicDigitalMusicPerformance" />
+	
+	<bean id = "xmlBasedAopBlankDisc" class="aop.xmlbased.withparameters.XmlBasedAopBlankDisc"/>
 
 	<!-- Declare aspect as a normal bean - #required -->
 	<bean id="xmlBasedAudiance" class="aop.xmlbased.XmlBasedAudiance" />
 
-	<bean id="xmlBasedPerformanceTimeCaculator"
-		class="aop.xmlbased.around.XmlBasedPerformanceTimeCaculator" />
+	<bean id="xmlBasedPerformanceTimeCaculator" class="aop.xmlbased.around.XmlBasedPerformanceTimeCaculator" />
+	
+	<bean id = "xmlBasedTrackCounter" class="aop.xmlbased.withparameters.XmlBasedTrackCounter" />
 
 	<!-- this is required. Almost 80% AOP configurations needs to be enclosed 
 		inside this -->
@@ -47,9 +49,17 @@
 				pointcut="execution(* aop.annotatiobased.Performance.perform())" />
 		</aop:aspect>
 
+
 		<aop:aspect ref="xmlBasedPerformanceTimeCaculator">
 			<!-- NOTE: we are referring common pointcut -->
 			<aop:around method="calculatePerformanceTime" pointcut-ref="performanceAudiance" />
+		</aop:aspect>
+		
+		
+		<aop:aspect ref="xmlBasedTrackCounter">
+			<aop:pointcut expression="execution(** playTrack(Integer)) and args(trackId))" id="xmlBasedTrackCounterAspect"/>
+		
+			<aop:before method="updateTrackCounter" pointcut-ref="xmlBasedTrackCounterAspect"/>
 		</aop:aspect>
 	</aop:config>
 </beans>
