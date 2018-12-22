@@ -12,26 +12,44 @@
 		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.3.xsd">
 
 	<!-- Declare beans -->
-	<bean id = "xmlBasedRockBand" class="aop.xmlbased.XmlBasedRockBand"/>
-	
-	<bean id = "xmlBasedElectronicDigitalMusicPerformance" class="aop.xmlbased.XmlBasedElectronicDigitalMusicPerformance"/>
-	
+	<bean id="xmlBasedRockBand" class="aop.xmlbased.XmlBasedRockBand" />
+
+	<bean id="xmlBasedElectronicDigitalMusicPerformance"
+		class="aop.xmlbased.XmlBasedElectronicDigitalMusicPerformance" />
+
 	<!-- Declare aspect as a normal bean - #required -->
-	<bean id = "xmlBasedAudiance" class="aop.xmlbased.XmlBasedAudiance"/>
-	
-	<!-- this is required. Almost 80% AOP configurations needs to be enclosed inside this -->
+	<bean id="xmlBasedAudiance" class="aop.xmlbased.XmlBasedAudiance" />
+
+	<bean id="xmlBasedPerformanceTimeCaculator"
+		class="aop.xmlbased.around.XmlBasedPerformanceTimeCaculator" />
+
+	<!-- this is required. Almost 80% AOP configurations needs to be enclosed 
+		inside this -->
 	<aop:config>
+		<!-- This is xml counterpart of @Pointcut annotation -->
+		<!-- We can define pointcut outside of aspect and inside config, and it 
+			can be shared/reused by multiple aspects -->
+		<aop:pointcut
+			expression="execution(* aop.annotatiobased.Performance.perform())"
+			id="performanceAudiance" />
 		<aop:aspect ref="xmlBasedAudiance">
-			<!-- This is xml counterpart of @Pointcut annotation -->
-			<aop:pointcut expression="execution(* aop.annotatiobased.Performance.perform())" id="performanceAudiance"/>
-				
-			<!-- these two advices references pointcut by pointcutId -->	
-			<aop:before method="switchOffPhones" pointcut-ref="performanceAudiance" />
-			<aop:before method="takeSeat" pointcut-ref="performanceAudiance"/>
-			
-			<!-- We can specify pointcut at advice level as well as we do in AspectJ @Before annotation -->
-			<aop:after method="applause" pointcut="execution(* aop.annotatiobased.Performance.perform())"/>
-			<aop:after-throwing method="demandRefund" pointcut="execution(* aop.annotatiobased.Performance.perform())"/>
+			<!-- these two advices references pointcut by pointcutId -->
+			<aop:before method="switchOffPhones"
+				pointcut-ref="performanceAudiance" />
+			<aop:before method="takeSeat"
+				pointcut-ref="performanceAudiance" />
+
+			<!-- We can specify pointcut at advice level as well as we do in AspectJ 
+				@Before annotation -->
+			<aop:after method="applause"
+				pointcut="execution(* aop.annotatiobased.Performance.perform())" />
+			<aop:after-throwing method="demandRefund"
+				pointcut="execution(* aop.annotatiobased.Performance.perform())" />
+		</aop:aspect>
+
+		<aop:aspect ref="xmlBasedPerformanceTimeCaculator">
+			<!-- NOTE: we are referring common pointcut -->
+			<aop:around method="calculatePerformanceTime" pointcut-ref="performanceAudiance" />
 		</aop:aspect>
 	</aop:config>
 </beans>
