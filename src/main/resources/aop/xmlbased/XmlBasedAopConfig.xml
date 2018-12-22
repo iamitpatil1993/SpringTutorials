@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:c="http://www.springframework.org/schema/c"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.3.xsd">
+
+	<!-- Declare beans -->
+	<bean id = "xmlBasedRockBand" class="aop.xmlbased.XmlBasedRockBand"/>
+	
+	<bean id = "xmlBasedElectronicDigitalMusicPerformance" class="aop.xmlbased.XmlBasedElectronicDigitalMusicPerformance"/>
+	
+	<!-- Declare aspect as a normal bean - #required -->
+	<bean id = "xmlBasedAudiance" class="aop.xmlbased.XmlBasedAudiance"/>
+	
+	<!-- this is required. Almost 80% AOP configurations needs to be enclosed inside this -->
+	<aop:config>
+		<aop:aspect ref="xmlBasedAudiance">
+			<!-- This is xml counterpart of @Pointcut annotation -->
+			<aop:pointcut expression="execution(* aop.annotatiobased.Performance.perform())" id="performanceAudiance"/>
+				
+			<!-- these two advices references pointcut by pointcutId -->	
+			<aop:before method="switchOffPhones" pointcut-ref="performanceAudiance" />
+			<aop:before method="takeSeat" pointcut-ref="performanceAudiance"/>
+			
+			<!-- We can specify pointcut at advice level as well as we do in AspectJ @Before annotation -->
+			<aop:after method="applause" pointcut="execution(* aop.annotatiobased.Performance.perform())"/>
+			<aop:after-throwing method="demandRefund" pointcut="execution(* aop.annotatiobased.Performance.perform())"/>
+		</aop:aspect>
+	</aop:config>
+</beans>

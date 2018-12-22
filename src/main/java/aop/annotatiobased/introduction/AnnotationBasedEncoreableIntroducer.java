@@ -20,6 +20,6 @@ public class AnnotationBasedEncoreableIntroducer {
 
 	// this annotation declares pointcut and implementation class of interface to which request will be delegated.
 	@DeclareParents(value = "aop.annotatiobased.Performance+", defaultImpl = AnnotationBasedDefaultEncoreable.class)
-	public static Encoreable encoreable; // This is interface we want to introduce
+	public static Encoreable encoreable; // This is interface we want to introduce, this attribute need not to be static
 
 }
