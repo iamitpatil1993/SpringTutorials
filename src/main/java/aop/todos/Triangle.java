@@ -17,7 +17,7 @@ import org.springframework.stereotype.Component;
 * proxy.
 */
 @Component
-public final class Triangle {
+public class Triangle {
 	
 	public Double area() {
 		System.out.println("calculating area of traingle...");
