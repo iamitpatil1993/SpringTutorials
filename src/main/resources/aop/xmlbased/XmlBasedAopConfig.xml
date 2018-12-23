@@ -17,6 +17,8 @@
 	<bean id="xmlBasedElectronicDigitalMusicPerformance" class="aop.xmlbased.XmlBasedElectronicDigitalMusicPerformance" />
 	
 	<bean id = "xmlBasedAopBlankDisc" class="aop.xmlbased.withparameters.XmlBasedAopBlankDisc"/>
+	
+	<bean id = "xmlBasedDefaultEncoreable" class="aop.xmlbased.introduction.XmlBasedDefaultEncoreable"/>
 
 	<!-- Declare aspect as a normal bean - #required -->
 	<bean id="xmlBasedAudiance" class="aop.xmlbased.XmlBasedAudiance" />
@@ -60,6 +62,19 @@
 			<aop:pointcut expression="execution(** playTrack(Integer)) and args(trackId))" id="xmlBasedTrackCounterAspect"/>
 		
 			<aop:before method="updateTrackCounter" pointcut-ref="xmlBasedTrackCounterAspect"/>
+		</aop:aspect>
+
+		<aop:aspect>
+			<!-- using default-impl (Specify class) -->
+			<!-- <aop:declare-parents types-matching="aop.annotatiobased.Performance+" 
+				implement-interface="aop.annotatiobased.introduction.Encoreable" default-impl="aop.xmlbased.introduction.XmlBasedDefaultEncoreable" 
+				/> -->
+				
+			<!-- Using delegate-ref (specify spring bean) -->
+			<aop:declare-parents
+				types-matching="aop.annotatiobased.Performance+"
+				implement-interface="aop.annotatiobased.introduction.Encoreable"
+				delegate-ref="xmlBasedDefaultEncoreable" />
 		</aop:aspect>
 	</aop:config>
 </beans>
