@@ -33,4 +33,11 @@ public class SingletonScopedBean {
         // Spring overrides this
         return null;
     }
+
+    @Lookup(value = "prototypeScopedBean") // we can ask for bean using bean Id by passing bean id as a attribute to lookup annotation.
+    public PrototypeScopedBean getPrototypeScopedBeanUsingId(UUID id) {
+        // Nothing to do here (stub implementation)
+        // Spring overrides this
+        return null;
+    }
 }

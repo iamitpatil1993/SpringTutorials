@@ -4,6 +4,7 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
@@ -18,6 +19,9 @@ public class SingletonScopedBeanTest {
 
     @Autowired
     private SingletonScopedBean singletonScopedBean;
+
+    @Autowired
+    private ApplicationContext applicationContext;
 
     /**
      * Since {@link org.springframework.beans.factory.annotation.Lookup} method uses ApplicationContext/BeanFactory
@@ -35,5 +39,18 @@ public class SingletonScopedBeanTest {
 
         Assert.assertFalse(prototypeBean1.getId().equals(prototypeBean2.getId()));
 
+    }
+
+    @Test
+    public void testGetPrototypeScopedBeanUsingId() {
+        UUID uuid1 = UUID.randomUUID();
+        final PrototypeScopedBean prototypeBean1 = singletonScopedBean.getPrototypeScopedBeanUsingId(uuid1);
+
+        UUID uuid2 = UUID.randomUUID();
+        final PrototypeScopedBean prototypeBean2 = singletonScopedBean.getPrototypeScopedBeanUsingId(uuid2);
+        // BOTH will be different object as scope in prototype
+        Assert.assertFalse(prototypeBean2.equals(prototypeBean1));
+
+        Assert.assertFalse(prototypeBean1.getId().equals(prototypeBean2.getId()));
     }
 }
